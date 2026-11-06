@@ -1,0 +1,37 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+h1 {
+  color: #1a73e8;
+  margin-bottom: 8px;
+}
+
+.status {
+  font-weight: 600;
+  color: #34a853;
+}
+
+.card {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #e8f0fe;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #3c4043;
+}
