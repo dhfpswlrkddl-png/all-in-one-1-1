@@ -1,3 +1,4 @@
+```
 # 경로 확인
 $ pwd
 /d/미션 1-1/git 사용
@@ -63,3 +64,4 @@ $ printf 'hello world!' > a (메모장으로 실행하면 hello world!가 적혀
 # 내용 읽기
 $ cat a
 hello world!
+```
