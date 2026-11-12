@@ -64,4 +64,13 @@ $ printf 'hello world!' > a (메모장으로 실행하면 hello world!가 적혀
 # 내용 읽기
 $ cat a
 hello world!
+
+# 권한 변경
+$ ls -l
+total 0
+-rw-r--r-- 1 root root 0 Nov 12 07:32 a
+$ chmod 777 a
+$ ls -l
+total 0
+-rwxrwxrwx 1 root root 0 Nov 12 07:32 a
 ```
