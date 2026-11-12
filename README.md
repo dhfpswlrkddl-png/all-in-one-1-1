@@ -359,7 +359,7 @@ Server: nginx/1.27.x
 #### 브라우저 접속 증빙 스크린샷
 > 브라우저 주소창(`http://localhost:8080`) 및 응답 화면이 포함된 캡처본:
 
-![Port 8080 Browser View](docs/images/web_port_8080.png)
+![Port 8080 Browser View](./스샷/docker%20ps2.png)
 *(이미지 위치: `docs/images/web_port_8080.png`)*
 
 ---
