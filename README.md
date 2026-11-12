@@ -115,78 +115,82 @@
 ### 5.1 터미널 기본 조작 로그
 
 터미널을 통해 작업 디렉토리를 생성하고 파일 탐색, 복사, 이동, 삭제를 수행한 기록입니다.
-
 ```bash
-# 1. 현재 작업 경로 확인
+# 경로 확인
 $ pwd
-/home/user/workspace/codyssey
+/d/미션 1-1/git 사용
 
-# 2. 실습용 디렉토리 생성 및 이동
-$ mkdir -p practice/test_dir
-$ cd practice
+# 파일 만들기
+$ touch a
 
-# 3. 빈 파일 생성 및 파일 내용 작성
-$ touch sample.txt
-$ echo "Hello Linux CLI Workstation" > sample.txt
+# 폴더 파일 속 파일들 확인
+$ ls
+a
 
-# 4. 파일 내용 확인
-$ cat sample.txt
-Hello Linux CLI Workstation
+# 모든 파일의 경로까지 확인
+$ ls -a
+./  ../  a
 
-# 5. 숨김 파일을 포함한 상세 목록 확인
-$ ls -la
-total 12
-drwxr-xr-x 3 user user 4096 Nov  6 13:00 .
-drwxr-xr-x 4 user user 4096 Nov  6 13:00 ..
--rw-r--r-- 1 user user   28 Nov  6 13:00 sample.txt
-drwxr-xr-x 2 user user 4096 Nov  6 13:00 test_dir
+# 파일들의 권한을 확인
+$ ls -l
+total 0
+-rw-r--r-- 1 dhfpswlrkddl8378 1049089 0 Nov 10 18:00 a
 
-# 6. 파일 복사 (sample.txt -> copy_sample.txt)
-$ cp sample.txt copy_sample.txt
+# 모든 하위 파일의 경로, 권한 확인
+$ ls -al
+total 4
+drwxr-xr-x 1 dhfpswlrkddl8378 1049089 0 Nov 10 18:00 ./
+drwxr-xr-x 1 dhfpswlrkddl8378 1049089 0 Nov 10 17:58 ../
+-rw-r--r-- 1 dhfpswlrkddl8378 1049089 0 Nov 10 18:00 a
 
-# 7. 파일 이름 변경 및 디렉토리 이동
-$ mv copy_sample.txt renamed.txt
-$ mv renamed.txt test_dir/
+# 경로 이동
+dhfpswlrkddl8378@GNIA-C202-G02 UCRT64 /d/미션 1-1/git 사용
+$ cd
+dhfpswlrkddl8378@GNIA-C202-G02 UCRT64 ~ (경로가 바뀌었음)
 
-# 8. 파일 및 디렉토리 삭제
-$ rm sample.txt
-$ rm -r test_dir
+# 폴더가 아닌 파일로 이동 시도
+$ cd a
+bash: cd: a: Not a directory
+
+# 존재하지 않는 경로로 이동 시도
+$ cd b
+bash: cd: b: No such file or directory
+
+# 파일 만들기
+$ touch b
+
+# 폴더 만들기
+$ mkdir c
+
+# 카피
+$ cp a c (c 폴더에 a 파일이 생긴것을 확인 할 수 있음)
+
+# 이동
+$ mv b c (b 파일이 사라지고 c 폴더 안에 b가 생긴것을 확인 할 수 있음)
+
+# 삭제
+$ rm a (a 파일이 사라짐)
+
+# 폴더 삭제
+$ rm -r c (c 폴더가 사라짐)
+
+# 내용 쓰기
+$ touch a
+$ printf 'hello world!' > a (메모장으로 실행하면 hello world!가 적혀있음)
+
+# 내용 읽기
+$ cat a
+hello world!
+
+# 권한 변경
+$ ls -l
+total 0
+-rw-r--r-- 1 root root 0 Nov 12 07:32 a
+$ chmod 777 a
+$ ls -l
+total 0
+-rwxrwxrwx 1 root root 0 Nov 12 07:32 a
 ```
-
----
-
-### 5.2 파일 및 디렉토리 권한 실습
-
-파일 1개와 디렉토리 1개를 생성하고 권한(`chmod`)을 변경하여 전/후 상태를 비교 검증하였습니다.
-
-```bash
-# 1. 실습 파일 및 디렉토리 준비
-$ touch auth_file.txt
-$ mkdir auth_dir
-
-# 2. 변경 전 기본 권한 확인
-$ ls -ld auth_file.txt auth_dir
--rw-r--r-- 1 user user    0 Nov  6 13:05 auth_file.txt   # (기본 644)
-drwxr-xr-x 2 user user 4096 Nov  6 13:05 auth_dir        # (기본 755)
-
-# 3. 권한 변경 수행
-# 파일에 실행 권한 부여 (644 -> 755)
-$ chmod 755 auth_file.txt
-
-# 디렉토리에 그룹 및 타사용자 쓰기/실행 제한 (755 -> 700)
-$ chmod 700 auth_dir
-
-# 4. 변경 후 권한 확인 (비교 검증)
-$ ls -ld auth_file.txt auth_dir
--rwxr-xr-x 1 user user    0 Nov  6 13:05 auth_file.txt   # (755로 변경 완료)
-drwx------ 2 user user 4096 Nov  6 13:05 auth_dir        # (700으로 변경 완료)
-```
-
-- **검증 분석**:
-  - `auth_file.txt`: 일반 읽기/쓰기 파일에서 `755`(소유자/그룹/기타 실행 권한)로 전환되어 실행 스크립트 형태의 권한 플래그(`-rwxr-xr-x`)가 활성화되었습니다.
-  - `auth_dir`: `700`(`drwx------`)으로 변경되어 소유자 이외의 사용자(Group/Others)는 해당 디렉토리에 진입(`cd`)하거나 파일 목록을 읽을 수 없도록 격리되었습니다.
-
----
 
 ### 5.3 Docker 설치 및 기본 점검
 
